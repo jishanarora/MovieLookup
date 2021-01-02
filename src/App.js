@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Homepage from './pages/homepage/homepage.component';
-import CollectionPage from './pages/collectionPage/collectionpage.component';
+import SearchPage from './pages/searchPage/searchPage.components';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import SignInSignUpPage from "./pages/signInSignUpPage/signInSignUpPage.component";
 import {auth,createUserProfileDocument} from './firebase/firebase.utils';
@@ -49,7 +49,7 @@ class App extends React.Component {
       <Sidebar/>
       <Switch>
         <Route exact path="/" component={Homepage}></Route>
-        <Route  path="/search" component={CollectionPage}></Route>
+        <Route  path="/search" component={SearchPage}></Route>
         <Route exact path="/sign-in" render={()=> this.props.currentUser? (<Redirect to="/" />):(<SignInSignUpPage/>)}></Route>
 
       </Switch>

@@ -16,7 +16,7 @@ const Sidebar=({hideSidebar,toggleSidebar, currentUser})=>(
           <SidebarMenu>
               <SidebarLink to='/about' onClick={toggleSidebar}>About</SidebarLink>
               <SidebarLink to='/search' onClick={toggleSidebar}>Search</SidebarLink>
-              {currentUser? <SidebarLink onClick={()=>auth.signOut(), toggleSidebar}>Sign Out</SidebarLink>:<SidebarLink className="option" to="/sign-in" onClick={toggleSidebar}>
+              {currentUser? <SidebarLink onClick={()=>{auth.signOut(); toggleSidebar();}}>Sign Out</SidebarLink>:<SidebarLink className="option" to="/sign-in" onClick={toggleSidebar}>
               Sign In
           </SidebarLink>}
           </SidebarMenu>
