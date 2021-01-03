@@ -9,14 +9,16 @@ import {auth} from '../../firebase/firebase.utils';
 
 
 
-const NavigationBar=({toggleSidebar,currentUser})=>(
+const NavigationBar=({toggleSidebar,currentUser})=>{
+    const greetings=currentUser?`Hello! ${(currentUser.displayName).toUpperCase()}`:null
+    return(
    <Nav>
        <NavbarContainer>
         <NavLogo to="/" >Movie Lookup</NavLogo> 
         <MobileIcon onClick={toggleSidebar}>
             <FaBars/>
         </MobileIcon>
-        <UserGreetings>Hello! {currentUser?(currentUser.displayName).toUpperCase():null}</UserGreetings>
+        <UserGreetings>{greetings}</UserGreetings>
         <NavMenu>
             <NavItem>
                 <NavLinks to='/about'>About</NavLinks>
@@ -32,8 +34,8 @@ const NavigationBar=({toggleSidebar,currentUser})=>(
              <NavLinks to="/sign-in">Sign In </NavLinks></NavItem>}
         </NavMenu>
        </NavbarContainer>
-   </Nav>
-)
+   </Nav>)
+}
 
 const mapDispatchToProps = dispatch =>({
     toggleSidebar: () => dispatch(toggleSidebar())

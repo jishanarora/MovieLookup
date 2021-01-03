@@ -4,14 +4,14 @@ import 'antd/dist/antd.css';
 import {SearchFormContainer, SearchPageContainer} from './searchPage.styles'
 import {connect} from 'react-redux'
 import {addMovies,updateSearch} from '../../redux/movies/movies.actions'
-import {selectMoviesList,selectSearchField} from '../../redux/movies/movies.selectors'
+import {selectMoviesList,selectSearchField,selectNominationsCount} from '../../redux/movies/movies.selectors'
 import {createStructuredSelector} from 'reselect';
 import CollectionItem from '../../components/collection-item/collection-item.component'
 import 'antd/dist/antd.css';
-import { Row, Col} from 'antd';
+import { Row, Col, Alert, Button} from 'antd';
 
     
-  const SearchPage=({setMovies,movies,setSearchField, serachField})=>{
+  const SearchPage=({setMovies,movies,setSearchField, serachField, getNominationsCount})=>{
 
     const handleChange=async (e)=>{
       setSearchField(e.target.value);
@@ -26,6 +26,11 @@ import { Row, Col} from 'antd';
 
       return (
           <SearchPageContainer>
+          {getNominationsCount>4?<Alert action={
+        <Button size="small" warn>
+          Open Nominations
+        </Button>
+      } message="You have selected the maximum allowed nominations, If you want to change your selections" banner />:null}
         <SearchFormContainer>
           <Form.Item
             name={'Search'}
@@ -45,7 +50,8 @@ import { Row, Col} from 'antd';
 
 const mapStateToProps = createStructuredSelector({
   movies: selectMoviesList,
-  serachField: selectSearchField
+  serachField: selectSearchField,
+  getNominationsCount: selectNominationsCount
   })
 
 const dispatchStateToProps=dispatch=>({

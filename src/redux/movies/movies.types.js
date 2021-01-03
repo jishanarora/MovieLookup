@@ -1,6 +1,8 @@
 const MoviesActionTypes={
     UPDATE_LIST: 'UPDATE_LIST',
-    UPDATE_SEARCH: 'UPDATE_SEARCH'
+    UPDATE_SEARCH: 'UPDATE_SEARCH',
+    ADD_NOMINATION: 'ADD_NOMINATION',
+    REMOVE_NOMINATION: 'REMOVE_NOMINATION'
 }
 
 export default MoviesActionTypes;

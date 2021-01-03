@@ -10,3 +10,13 @@ export const updateSearch= searchString=>({
   type:MoviesActionTypes.UPDATE_SEARCH,
   payload: searchString
 })
+
+export const addNomination = item => ({
+  type:MoviesActionTypes.ADD_NOMINATION,
+  payload:item
+ })
+ 
+ export const removeNomination = item => ({
+   type:MoviesActionTypes.REMOVE_NOMINATION,
+   payload:item
+  })
