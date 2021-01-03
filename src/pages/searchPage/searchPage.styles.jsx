@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Form, Input } from 'antd';
+import { Form} from 'antd';
 
 export const SearchFormContainer= styled(Form)`
 margin: auto;
@@ -9,5 +9,5 @@ margin-top: 40px;
 `
 
 export const SearchPageContainer= styled.div`
-
+margin: 20px;
 `

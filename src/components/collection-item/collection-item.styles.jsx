@@ -5,7 +5,7 @@ export const CollectionItemContainer=styled.div`
 width: 22vw;
 display: flex;
 flex-direction: column;
-height: 230px;
+height: 238px;
 align-items: center;
 position: relative;
 
@@ -20,10 +20,18 @@ position: relative;
     }
 }
 
+@media screen and (max-width: 768px){
+  width: 30vw;
+}
+
+@media screen and (max-width: 570px){
+  width: 80vw;
+}
+
 `
 
 export const AddButton=styled(CustomButtonContainer)`
-width: 80%;
+width: 70%;
 opacity: 0.7;
 position: absolute;
 top: 150px;
@@ -43,15 +51,17 @@ export const CollectionFooterContainer = styled.div`
   height: 5%;
   display: flex;
   justify-content: space-between;
-  font-size: 18px;
+  font-size: 15px;
 `;
 
 export const NameContainer = styled.span`
-  width: 90%;
+  width: 60%;
   margin-bottom: 15px;
+  font-size: 15px;
 `;
 
-export const PriceContainer = styled.span`
-  width: 10%;
+export const YearContainer = styled.span`
+  width: 40%;
   text-align: right;
+  font-size: 15px;
 `;

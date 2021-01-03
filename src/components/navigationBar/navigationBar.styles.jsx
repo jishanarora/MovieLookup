@@ -86,9 +86,12 @@ font-size: 1.2rem;
 }
 `
 
-export const NavButton= styled.nav`
-display: flex;
-align-items: center;
+export const UserGreetings= styled.div`
+color: white;
+font-size: 1.2rem;
+font-weight: bold;
+margin: auto;
+
 
 @media screen and (max-width: 768px){
     display: none;

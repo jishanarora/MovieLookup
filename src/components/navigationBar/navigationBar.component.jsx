@@ -1,5 +1,5 @@
 import React from 'react'
-import {Nav,NavbarContainer,NavLogo,MobileIcon,NavMenu,NavLinks,NavItem} from './navigationBar.styles'
+import {Nav,NavbarContainer,NavLogo,MobileIcon,NavMenu,NavLinks,NavItem,UserGreetings} from './navigationBar.styles'
 import {FaBars} from 'react-icons/fa'
 import {connect} from 'react-redux';
 import {toggleSidebar} from '../../redux/sidebar/sidebar.actions'
@@ -16,6 +16,7 @@ const NavigationBar=({toggleSidebar,currentUser})=>(
         <MobileIcon onClick={toggleSidebar}>
             <FaBars/>
         </MobileIcon>
+        <UserGreetings>Hello! {currentUser?(currentUser.displayName).toUpperCase():null}</UserGreetings>
         <NavMenu>
             <NavItem>
                 <NavLinks to='/about'>About</NavLinks>
