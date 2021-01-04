@@ -1,5 +1,7 @@
-const CartActionTypes={
+const SidebarActionTypes={
     TOGGLE_SIDEBAR: 'TOGGLE_SIDEBAR',
+    OPEN_NOMINATIONS: 'OPEN_NOMINATIONS',
+    CLOSE_NOMINATIONS: 'CLOSE_NOMINATIONS'
 }
 
-export default CartActionTypes;
+export default SidebarActionTypes;

@@ -18,6 +18,11 @@ position: relative;
         opacity: 0.85 !important;
         display: flex;
     }
+
+    div{
+      opacity: 0.85 !important;
+      display: flex;
+    }
 }
 
 @media screen and (max-width: 768px){
@@ -31,12 +36,43 @@ position: relative;
 `
 
 export const AddButton=styled(CustomButtonContainer)`
-width: 70%;
+width: 80%;
 opacity: 0.7;
 position: absolute;
 top: 150px;
 display: none;
+font-size: 0.9rem;
+
+@media screen and (max-width: 1050px){
+  font-size: 0.8rem;
+}
+
+@media screen and (max-width: 1000px){
+  font-size: 0.7rem;
+}
 `
+export const Message=styled.div`
+width: 70%;
+background: white;
+border: 1px solid red;
+opacity: 0.9;
+position: absolute;
+top: 80px;
+display: none;
+color: red;
+padding: 10px;
+text-align: center;
+font-size: 0.9rem;
+
+@media screen and (max-width: 1050px){
+  font-size: 0.8rem;
+}
+
+@media screen and (max-width: 1000px){
+  font-size: 0.7rem;
+}
+`
+
 export const CollectionImage = styled.div`
 width: 100%;
 height: 95%;

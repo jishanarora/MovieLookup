@@ -1,7 +1,17 @@
-import CartActionTypes from './sidebar.types';
+import SidebarActionTypes from './sidebar.types';
 
  export const toggleSidebar = () => ({
-  type: CartActionTypes.TOGGLE_SIDEBAR
+  type: SidebarActionTypes.TOGGLE_SIDEBAR
 });
+
+export const openNominations = () => ({
+  type: SidebarActionTypes.OPEN_NOMINATIONS
+});
+
+
+export const closeNominations = () => ({
+  type: SidebarActionTypes.CLOSE_NOMINATIONS
+});
+
 
 

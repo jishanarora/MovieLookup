@@ -2,8 +2,14 @@ import {createSelector} from 'reselect';
 
 const selectSidebar = state =>state.sidebar;
 
-export const selectCartHidden= createSelector(
+export const selectSidebarHidden= createSelector(
     [selectSidebar],
     sidebar=>sidebar.hidden
 );
+
+export const selectShowNominations= createSelector(
+    [selectSidebar],
+    sidebar=>sidebar.showModal
+);
+
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Tooltip, Modal } from 'antd';
-import {AddButton,CollectionImage,CollectionItemContainer,CollectionFooterContainer,NameContainer,YearContainer} from './collection-item.styles'
+import {AddButton,CollectionImage,CollectionItemContainer,CollectionFooterContainer,NameContainer,YearContainer, Message} from './collection-item.styles'
 import {addNomination} from '../../redux/movies/movies.actions'
-import {selectNominationsCount,selectIfNominated} from '../../redux/movies/movies.selectors'
+import {selectNominationsCount} from '../../redux/movies/movies.selectors'
+import {openNominations} from '../../redux/sidebar/sidebar.actions'
 import {createStructuredSelector} from 'reselect';
-
-const CollectionItem = ({item,addNomination, getNominationsCount})=>
+const CollectionItem = ({item,addNomination, getNominationsCount, openModal})=>
 { const {Poster,Title, Year}= item;
   const noImage='../images/noImageAvailable.jpeg'
 
@@ -31,6 +31,17 @@ const CollectionItem = ({item,addNomination, getNominationsCount})=>
 }
   }
 
+  const handleOnclick=()=>{
+    if(getNominationsCount>4)
+    {
+     openModal();
+    }
+    else{
+      addNomination(item); countDown();
+    }
+  }
+
+
     return(
         <Tooltip title={Title}>
         <CollectionItemContainer>
@@ -39,18 +50,20 @@ const CollectionItem = ({item,addNomination, getNominationsCount})=>
                 <NameContainer>{Title.length>20?Title.substring(0,20)+'...': Title}</NameContainer>
                 <YearContainer>Year: {Year}</YearContainer>
             </CollectionFooterContainer>
-         <AddButton inverted onClick={()=>{addNomination(item); countDown();}} disabled={getNominationsCount>4}>{getNominationsCount>4?'Limit Reached':'Nominate'}</AddButton>
+            {getNominationsCount>4?<Message>Can't choose more than 5!</Message>: null}
+         <AddButton inverted onClick={handleOnclick}>{getNominationsCount>4?'Go to Nominations':'Nominate'}</AddButton>
         </CollectionItemContainer>
         </Tooltip>
     )
 }
 
 const dispatchStateToProps= dispatch=>({
- addNomination:(movie)=> dispatch(addNomination(movie))
+ addNomination:(movie)=> dispatch(addNomination(movie)),
+ openModal: ()=> dispatch(openNominations())
 })
 
 const mapStateToProps= createStructuredSelector({
-    getNominationsCount: selectNominationsCount
+    getNominationsCount: selectNominationsCount,
 })
 
 export default connect(mapStateToProps, dispatchStateToProps)(CollectionItem);

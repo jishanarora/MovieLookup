@@ -50,6 +50,21 @@ cursor: pointer;
     transition: 0.2 ease-in-out;
 }
 `
+
+export const Greetings= styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 2rem;
+text-decoration: none;
+list-style: none;
+transition: 0.2s ease-in-out;
+text-decoration: none;
+color: #01bf71;
+cursor: pointer;
+margin-bottom: 50px;
+`
+
 export const SidebarButtonWrap=styled.div`
 display: flex;
 justify-content: center;

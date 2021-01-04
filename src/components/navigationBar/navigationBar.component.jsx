@@ -6,10 +6,11 @@ import {toggleSidebar} from '../../redux/sidebar/sidebar.actions'
 import {selectCurrentUser} from '../../redux/user/user.selectors'
 import {createStructuredSelector} from 'reselect';
 import {auth} from '../../firebase/firebase.utils';
+import {openNominations} from '../../redux/sidebar/sidebar.actions'
 
 
 
-const NavigationBar=({toggleSidebar,currentUser})=>{
+const NavigationBar=({toggleSidebar,currentUser, openModal})=>{
     const greetings=currentUser?`Hello! ${(currentUser.displayName).toUpperCase()}`:null
     return(
    <Nav>
@@ -21,10 +22,10 @@ const NavigationBar=({toggleSidebar,currentUser})=>{
         <UserGreetings>{greetings}</UserGreetings>
         <NavMenu>
             <NavItem>
-                <NavLinks to='/about'>About</NavLinks>
+                <NavLinks to='/search'>Search</NavLinks>
             </NavItem>
             <NavItem>
-                <NavLinks to='/search'>Search</NavLinks>
+                <NavLinks to='/search' onClick={openModal}>Nominations</NavLinks>
             </NavItem>
             {currentUser?
             <NavItem>
@@ -38,7 +39,8 @@ const NavigationBar=({toggleSidebar,currentUser})=>{
 }
 
 const mapDispatchToProps = dispatch =>({
-    toggleSidebar: () => dispatch(toggleSidebar())
+    toggleSidebar: () => dispatch(toggleSidebar()),
+    openModal: ()=> dispatch(openNominations())
 })
 
 const mapStateToProps = createStructuredSelector({
