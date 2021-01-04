@@ -3,7 +3,7 @@ import { Form, Input } from 'antd';
 import 'antd/dist/antd.css';
 import {SearchFormContainer, SearchPageContainer, NominationsHeader, NominationsHeaderBlock} from './searchPage.styles'
 import {connect} from 'react-redux'
-import {addMovies,updateSearch} from '../../redux/movies/movies.actions'
+import {addMovies,updateSearch, emptyMovies} from '../../redux/movies/movies.actions'
 import {selectMoviesList,selectSearchField,selectNominationsCount, selectNominationsList} from '../../redux/movies/movies.selectors'
 import {createStructuredSelector} from 'reselect';
 import CollectionItem from '../../components/collection-item/collection-item.component'
@@ -13,7 +13,7 @@ import NominationItems from '../../components/nomination-items/nomination-items.
 import {openNominations, closeNominations} from '../../redux/sidebar/sidebar.actions'
 import {selectShowNominations} from '../../redux/sidebar/sidebar.selectors'
     
-  const SearchPage=({setMovies,movies,setSearchField, serachField, getNominationsCount, nominations, openModal,closeModal,showModal})=>{
+  const SearchPage=({setMovies,movies,setSearchField, serachField, getNominationsCount, nominations,emptyMovies, openModal,closeModal,showModal})=>{
     
     const handleChange=async (e)=>{
       setSearchField(e.target.value);
@@ -22,6 +22,9 @@ import {selectShowNominations} from '../../redux/sidebar/sidebar.selectors'
       const responseJson= await response.json();
       if(responseJson.Search){
       setMovies(responseJson.Search);
+      }
+      else{
+      emptyMovies();
       }
 
     }
@@ -77,6 +80,7 @@ const mapStateToProps = createStructuredSelector({
 const dispatchStateToProps=dispatch=>({
  setMovies:(movies)=> dispatch(addMovies(movies)),
  setSearchField:(serachString)=> dispatch(updateSearch(serachString)),
+ emptyMovies:()=> dispatch(emptyMovies()),
  openModal: ()=> dispatch(openNominations()),
  closeModal: ()=> dispatch(closeNominations())
 

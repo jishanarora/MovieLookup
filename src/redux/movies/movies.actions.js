@@ -6,6 +6,11 @@ export const addMovies = item => ({
  payload:item
 })
 
+export const emptyMovies=()=> ({
+  type:MoviesActionTypes.EmptyMovies,
+ })
+ 
+
 export const updateSearch= searchString=>({
   type:MoviesActionTypes.UPDATE_SEARCH,
   payload: searchString

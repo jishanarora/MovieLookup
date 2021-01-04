@@ -14,6 +14,11 @@ const moviesReducer = (state = INITIAL_STATE, action) => {
         ...state,
         movieList: action.payload===undefined? [] : action.payload
       };
+      case MoviesActionTypes.EMPTY_MOVIES:
+        return {
+          ...state,
+          movieList: [] 
+        };
       case MoviesActionTypes.UPDATE_SEARCH:
       return {
         ...state,
