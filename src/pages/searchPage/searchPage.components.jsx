@@ -1,5 +1,5 @@
-import React from 'react'
-import { Form, Input } from 'antd';
+import React, { useState } from 'react'
+import { Form, Input, Result} from 'antd';
 import 'antd/dist/antd.css';
 import {SearchFormContainer, SearchPageContainer, NominationsHeader, NominationsHeaderBlock} from './searchPage.styles'
 import {connect} from 'react-redux'
@@ -12,26 +12,29 @@ import { Row, Col, Alert, Button, Modal} from 'antd';
 import NominationItems from '../../components/nomination-items/nomination-items.component'
 import {openNominations, closeNominations} from '../../redux/sidebar/sidebar.actions'
 import {selectShowNominations} from '../../redux/sidebar/sidebar.selectors'
+import {LoadingOutlined,SmileOutlined} from '@ant-design/icons';
     
   const SearchPage=({setMovies,movies,setSearchField, serachField, getNominationsCount, nominations,emptyMovies, openModal,closeModal,showModal})=>{
     
+    const [loading,setLoading]=useState(false);
+
     const handleChange=async (e)=>{
+      setLoading(true);
       setSearchField(e.target.value);
       const url= `http://www.omdbapi.com/?i=tt3896198&apikey=e388dd12&s=${(e.target.value).trim()}&type=movie`;
-      const response= await fetch(url);
-      const responseJson= await response.json();
-      console.log(responseJson)
-      if(responseJson.Search){
-      setMovies(responseJson.Search);
-      }
-      else{
-      emptyMovies();
-      }
+      fetch(url).then(response=>response.json()).then((responseJson)=>{ setLoading(false);
+        if(responseJson.Search){
+        setMovies(responseJson.Search);
+        }
+        else{
+        emptyMovies();
+        }
+  })
 
     }
 
       return (
-          <SearchPageContainer>
+      <SearchPageContainer>
         <Modal title="Nominations" visible={showModal} onOk={closeModal}>
         <NominationsHeader>
       <NominationsHeaderBlock>
@@ -60,9 +63,18 @@ import {selectShowNominations} from '../../redux/sidebar/sidebar.selectors'
             <Input onKeyDown={handleChange} onKeyUp={handleChange} defaultValue={serachField}/>
           </Form.Item>
         </SearchFormContainer>
-        <Row gutter={[20, 60]}>
+      {loading?<LoadingOutlined style={{fontSize:"100px", position:'absolute', top:'50%', left:'50%', margin: '-25px 0 0 -25px'}}/>:
+      <Row gutter={[20, 60]}>
       {movies?movies.map(movie=><Col lg={6} md={6} sm={8} xs={22}><CollectionItem Key={movie.imdbID} item={movie}/></Col>):null}
      </Row>   
+      }
+      {
+       movies.length===0?<Result
+       icon={<SmileOutlined />}
+       title="Try refining your search!"
+       style={{marginTop:'10%'}}
+     />: null 
+      }
         </SearchPageContainer>
       );
 
