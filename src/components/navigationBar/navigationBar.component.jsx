@@ -11,7 +11,7 @@ import {openNominations} from '../../redux/sidebar/sidebar.actions'
 
 
 const NavigationBar=({toggleSidebar,currentUser, openModal})=>{
-    //const greetings=currentUser?`Hello! ${(currentUser.displayName).toUpperCase()}`:null
+    const greetings=currentUser?`Hello! ${(currentUser.displayName).toUpperCase()}`:null
     return(
    <Nav>
        <NavbarContainer>
@@ -19,6 +19,7 @@ const NavigationBar=({toggleSidebar,currentUser, openModal})=>{
         <MobileIcon onClick={toggleSidebar}>
             <FaBars/>
         </MobileIcon>
+        <UserGreetings>{greetings}</UserGreetings>
         <NavMenu>
             <NavItem>
                 <NavLinks to='/search'>Search</NavLinks>
