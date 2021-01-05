@@ -4,6 +4,7 @@ import sidebarReducer from './sidebar/sidebar.reducer';
 import moviesReducer from './movies/movies.reducer'
 import { persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
+import variablesReducer from './variables/variables.reducer'
 
 const persistConfig={
     key: 'root',
@@ -14,7 +15,8 @@ const persistConfig={
 const rootReducer= combineReducers({
     user:userReducer,
     sidebar:sidebarReducer,
-    movies: moviesReducer
+    movies: moviesReducer,
+    variables: variablesReducer
 
 });
 export default persistReducer(persistConfig,rootReducer);
