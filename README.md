@@ -3,3 +3,10 @@
 
 # Resources Used:
 ## Redux, Styled Componennts, Firebase, Ant React UI Framework, Reselect and Microsoft Azure
+
+
+<img src="public/images/MovieLookup1.PNG">
+<img src="public/images/MovieLookup2.PNG">
+<img src="public/images/MovieLookup3.PNG">
+<img src="public/images/MovieLookup4.PNG">
+<img src="public/images/MovieLookup5.PNG">
