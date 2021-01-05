@@ -3,39 +3,65 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const config={
-    apiKey: "AIzaSyD4-a1_yMGVNG7sY8e4i_5SS-d3MpcaWKQ",
-    authDomain: "sparsh-furniture.firebaseapp.com",
-    databaseURL: "https://sparsh-furniture.firebaseio.com",
-    projectId: "sparsh-furniture",
-    storageBucket: "sparsh-furniture.appspot.com",
-    messagingSenderId: "944299765758",
-    appId: "1:944299765758:web:0aa1437eb7b3beba955aaf"
+    apiKey: "AIzaSyBPx-Ems2SAPjMEuKA_zKjCf5f344ROn9I",
+    authDomain: "movielookup-70dab.firebaseapp.com",
+    projectId: "movielookup-70dab",
+    storageBucket: "movielookup-70dab.appspot.com",
+    messagingSenderId: "103287162564",
+    appId: "1:103287162564:web:9d5cbc154e2e6dce24eb91",
+    measurementId: "G-4RNS3L5MQZ"
 }
 
-export const createUserProfileDocument = async (userAuth, additionalData) =>{
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+   
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+   
+    const snapShot = await userRef.get();
+   
+    if (!snapShot.exists) {
+      const { displayName, email } = userAuth;
+      const createdAt = new Date();
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          nominations: [],
+          ...additionalData
+        });
+      } catch (error) {
+        console.log('error creating user', error.message);
+      }
+    }
+   
+    return userRef;
+  };
+export const updateNominations = async (userAuth, nominations) =>{
     if(!userAuth) return;
     const userRef = firestore.doc(`users/${userAuth.uid}`);
-    const snapShot = userRef.get();
 
-    if(!snapShot.exists)
-    {
-        var {displayName, email} = userAuth;
-        const createdAt = new Date();
         try{
-            await userRef.set({
-                displayName,
-                email,
-                createdAt,
-                ...additionalData
-            })
+            await userRef.update({"nominations":nominations})
         }
         catch(error)
         {
         console.log('Error creating user',error.message);
         }
-    }
-    return userRef;
 }
+
+
+export const getNominations = async (userAuth) =>{
+    if(!userAuth) return;
+
+
+    const userRef= firestore.doc(`users/${userAuth.uid}`);
+    userRef.get().then((response)=>{console.log(response.data()); return response.data()})
+
+}
+
+
+
 
 firebase.initializeApp(config);
 

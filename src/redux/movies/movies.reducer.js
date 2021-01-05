@@ -1,6 +1,7 @@
 import MoviesActionTypes from './movies.types';
 import {addNominationMovie,removeNominationMovie} from './movies.utils'
 
+
 const INITIAL_STATE = {
   nominations: [],
   movieList: [],
@@ -18,6 +19,11 @@ const moviesReducer = (state = INITIAL_STATE, action) => {
         return {
           ...state,
           movieList: [] 
+        };
+        case MoviesActionTypes.SET_NOMINATIONS:
+        return {
+          ...state,
+          nominations: action.payload
         };
       case MoviesActionTypes.UPDATE_SEARCH:
       return {

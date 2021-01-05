@@ -17,9 +17,10 @@ import {selectShowNominations} from '../../redux/sidebar/sidebar.selectors'
     
     const handleChange=async (e)=>{
       setSearchField(e.target.value);
-      const url= `http://www.omdbapi.com/?i=tt3896198&apikey=e388dd12&s=${e.target.value}&type=movie`;
+      const url= `http://www.omdbapi.com/?i=tt3896198&apikey=e388dd12&s=${(e.target.value).trim()}&type=movie`;
       const response= await fetch(url);
       const responseJson= await response.json();
+      console.log(responseJson)
       if(responseJson.Search){
       setMovies(responseJson.Search);
       }

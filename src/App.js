@@ -4,44 +4,43 @@ import Homepage from './pages/homepage/homepage.component';
 import SearchPage from './pages/searchPage/searchPage.components';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import SignInSignUpPage from "./pages/signInSignUpPage/signInSignUpPage.component";
-import {auth,createUserProfileDocument} from './firebase/firebase.utils';
+import {auth,createUserProfileDocument, getNominations} from './firebase/firebase.utils';
 import {connect} from 'react-redux'
 import {setCurrentUser} from './redux/user/user-actions';
 import {createStructuredSelector} from 'reselect'
 import {selectCurrentUser} from './redux/user/user.selectors'
 import NavigationBar from './components/navigationBar/navigationBar.component'
 import Sidebar from './components/navigationBar/sidebar.component';
-
+import {setNominations} from './redux/movies/movies.actions'
 
 class App extends React.Component {
  
-  
-  unsubscribeFromAuth=null;
-  componentDidMount()
-  {
-    const {setCurrentUser}= this.props;
-   this.unsubscribeFromAuth=auth.onAuthStateChanged(async (userAuth) =>{
-     if(userAuth){
-       const userRef = await createUserProfileDocument(userAuth);
+  unsubscribeFromAuth = null;
+ 
+  componentDidMount() {
+    const { setCurrentUser, setNominations } = this.props;
+ 
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+ 
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
 
-       userRef.onSnapshot(onSnapshot => {
-         setCurrentUser( {
-             id: onSnapshot.id,
-             ...onSnapshot.data()
-          })
-       })
-     }
-     else{
-       setCurrentUser(userAuth)
-     }
-   }); 
+          setNominations(snapShot.data().nominations);
+        });
+      }
+ 
+      setCurrentUser(userAuth);
+    });
   }
-
-  componentWillUnmount()
-  {
+ 
+  componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
-
   render(){
   return (
     <div>
@@ -62,7 +61,8 @@ const mapStateToProps=createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch =>({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  setNominations: (nominations) =>dispatch(setNominations(nominations))
 
 })
 

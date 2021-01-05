@@ -14,7 +14,6 @@ const Sidebar=({hideSidebar,toggleSidebar, currentUser, openModal})=>(
             <ClosedIcon/>
         </Icon>
         <SidebarWrapper>
-            <Greetings>{currentUser?(`Hello! ${currentUser.displayName}`).toUpperCase():null}</Greetings>
           <SidebarMenu>
               <SidebarLink to='/search' onClick={toggleSidebar}>Search</SidebarLink>
               <SidebarLink to='/search' onClick={()=>{openModal(); toggleSidebar();}}>Nominations</SidebarLink>

@@ -7,7 +7,7 @@ export const addMovies = item => ({
 })
 
 export const emptyMovies=()=> ({
-  type:MoviesActionTypes.EmptyMovies,
+  type:MoviesActionTypes.EMPTY_MOVIES,
  })
  
 
@@ -25,3 +25,8 @@ export const addNomination = item => ({
    type:MoviesActionTypes.REMOVE_NOMINATION,
    payload:item
   })
+
+  export const setNominations = item => ({
+    type:MoviesActionTypes.SET_NOMINATIONS,
+    payload:item
+   })
