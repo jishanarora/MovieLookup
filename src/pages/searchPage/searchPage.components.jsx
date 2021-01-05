@@ -21,7 +21,7 @@ import {LoadingOutlined,SmileOutlined} from '@ant-design/icons';
     const handleChange=async (e)=>{
       setLoading(true);
       setSearchField(e.target.value);
-      const url= `http://www.omdbapi.com/?i=tt3896198&apikey=e388dd12&s=${(e.target.value).trim()}&type=movie`;
+      const url= `https://www.omdbapi.com/?i=tt3896198&apikey=e388dd12&s=${(e.target.value).trim()}&type=movie`;
       fetch(url).then(response=>response.json()).then((responseJson)=>{ setLoading(false);
         if(responseJson.Search){
         setMovies(responseJson.Search);
