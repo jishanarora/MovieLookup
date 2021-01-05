@@ -3,13 +3,13 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const config={
-    apiKey: "AIzaSyBPx-Ems2SAPjMEuKA_zKjCf5f344ROn9I",
-    authDomain: "movielookup-70dab.firebaseapp.com",
-    projectId: "movielookup-70dab",
-    storageBucket: "movielookup-70dab.appspot.com",
-    messagingSenderId: "103287162564",
-    appId: "1:103287162564:web:9d5cbc154e2e6dce24eb91",
-    measurementId: "G-4RNS3L5MQZ"
+  apiKey: "AIzaSyD4-a1_yMGVNG7sY8e4i_5SS-d3MpcaWKQ",
+  authDomain: "sparsh-furniture.firebaseapp.com",
+  databaseURL: "https://sparsh-furniture.firebaseio.com",
+  projectId: "sparsh-furniture",
+  storageBucket: "sparsh-furniture.appspot.com",
+  messagingSenderId: "944299765758",
+  appId: "1:944299765758:web:0aa1437eb7b3beba955aaf"
 }
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
