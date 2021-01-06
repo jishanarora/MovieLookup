@@ -4,6 +4,7 @@ import { CustomButtonContainer } from "../../components/custom-button/custom-but
 
 export const HomePageContainer = styled.div`
   backgorund: #0c0c0c;
+  margin-top: -70px;
   height: 100vh;
   width: 100%;
   display: flex;
